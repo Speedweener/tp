@@ -102,7 +102,7 @@ public class Bookmark {
         } else {
             link = url;
         }
-        rt.exec("open " + url);
+        rt.exec("open " + link);
     }
 
     private void launchUrlForLinux(Runtime rt) throws IOException {

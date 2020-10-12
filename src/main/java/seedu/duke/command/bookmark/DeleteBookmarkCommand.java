@@ -50,7 +50,8 @@ public class DeleteBookmarkCommand extends Command {
             ui.print(getMessage(bookmark));
             bookmarkStorage.save(bookmarks.getData());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(DukeExceptionType.INVALID_BOOKMARK_NUMBER);
+            throw new DukeException(DukeExceptionType.INVALID_BOOKMARK_NUMBER, ""
+                    + bookmarks.getBookmarkList().size());
         }
     }
 

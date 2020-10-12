@@ -47,6 +47,8 @@ public class BookmarkList extends ItemList {
      * @param bookmark the bookmark to be added to the list.
      */
     public void addBookmark(Bookmark bookmark)  {
+        assert bookmark != null : "Added Bookmark is null!";
+
         bookmarks.add(bookmark);
     }
 
@@ -90,6 +92,9 @@ public class BookmarkList extends ItemList {
      * @return The bookmark with the corresponding index in the list.
      */
     public Bookmark getBookmark(int index) {
+        assert index<=bookmarks.size() : "Index exceeds size of bookmark list!";
+        assert index>0 : "Index entered is invalid!";
+
         return bookmarks.get(index);
     }
 

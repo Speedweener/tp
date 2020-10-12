@@ -28,6 +28,7 @@ public class ShowTimetableCommand extends Command {
     public String getDayFromCommand(String input) {
         String outputData;
 
+        assert input.startsWith(ShowTimetableCommand.SHOW_KW) : "input should always start with \"show\"";
         if (input.length() == 4) {
             return "ALL";
         } else if (input.substring(4, 5).equals(" ") == false) {

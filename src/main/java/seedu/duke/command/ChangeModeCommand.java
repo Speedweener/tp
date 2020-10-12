@@ -38,6 +38,7 @@ public class ChangeModeCommand extends Command {
     public int getModeFromCommand(String input) {
         int outputData;
 
+        assert input.startsWith(ChangeModeCommand.MODE_KW) : "input should always start with \"mode\"";
         if (input.length() <= 5) {
             return 0;
         }
