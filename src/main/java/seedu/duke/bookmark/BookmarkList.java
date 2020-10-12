@@ -92,8 +92,8 @@ public class BookmarkList extends ItemList {
      * @throws DukeException if the index is out of range.
      */
     public Bookmark getBookmark(int index) {
-        assert index<=bookmarks.size() : "Index exceeds size of bookmark list!";
-        assert index>0 : "Index entered is invalid!";
+        assert index <= bookmarks.size() : "Index exceeds size of bookmark list!";
+        assert index >0 : "Index entered is invalid!";
 
         return bookmarks.get(index);
     }
