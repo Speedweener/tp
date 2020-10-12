@@ -19,14 +19,14 @@ public class LaunchBookmarkCommand extends Command {
     private List<String> moduleAndDescription;
     private int launchTypeFlag;
 
-
     /**
-     * Constructs a new LaunchBookmarkCommand instance and and gets the index of the bookmark to launch.
-     * Determines whether the launch command was input with an integer or string. and sets launchTypeFlag
-     * accordingly
+     * Constructs a new LaunchBookmarkCommand instance and gets the index of the bookmark to launch.
+     * Determines whether the launch command was input with an integer or string, and sets launchTypeFlag accordingly.
      * Integer (launchTypeFlag = 1)
      * Strings (launchTypeFlag = 2)
+     *
      * @param command The command input by the user.
+     * @throws DukeException if the input is unknown or if the bookmark number is invalid.
      */
     public LaunchBookmarkCommand(String command) throws DukeException {
         String details = command.substring(LAUNCH_KW.length());
@@ -46,11 +46,14 @@ public class LaunchBookmarkCommand extends Command {
     }
 
     /**
-     * Launches the bookmark based on the launchTypeFlag previously determined
-     * in LaunchBookmarkCommand initialization.
+     * Launches the bookmark based on the launchTypeFlag previously determined in LaunchBookmarkCommand initialization.
      *
      * @param bookmarks The list of bookmarks.
+     * @param slotList The list of slots.
      * @param ui The user interface.
+     * @param bookmarkStorage The storage for saving and loading bookmarks.
+     * @param slotStorage The storage for saving and loading slots.
+     * @throws DukeException if the bookmark number is invalid or if there is an error launching the URL.
      */
     @Override
     public void execute(BookmarkList bookmarks, SlotList slotList, Ui ui,

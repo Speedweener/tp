@@ -26,9 +26,9 @@ public class Bookmark {
      * @param description The description of the webpage.
      */
     public Bookmark(String module, String description, String url) {
-        assert module != null : "module is not null";
-        assert description != null : "description is not null";
-        assert url != null : "url is not null";
+        assert module != null : "module should not be null";
+        assert description != null : "description should not be null";
+        assert url != null : "url should not be null";
 
         this.module = module.trim();
         this.description = description.trim();
@@ -39,19 +39,23 @@ public class Bookmark {
      * Returns the topic, URL and description that can be detected from the given input.
      *
      * @param input the string input by the user.
-     * @return a list of strings containing the topic, URL and the description
+     * @return a list of strings containing the topic, URL and the description.
+     * @throws DukeException if the command format is invalid, if the description is empty or if the url is invalid.
      */
     public static List<String> extractModuleDescriptionAndUrl(String input) throws DukeException {
         assert input.startsWith(AddBookmarkCommand.ADD_KW) : "input should always start with \"add\"";
-        input = input.substring(AddBookmarkCommand.ADD_KW.length()).trim();
-        List<String> moduleDescriptionUrl = new ArrayList<>(Arrays.asList(input.split(" ", 3)));
+        input = input.substring(AddBookmarkCommand.ADD_KW.length());
+        if (!input.startsWith(" ")) {
+            throw new DukeException(DukeExceptionType.UNKNOWN_INPUT);
+        }
+        List<String> moduleDescriptionUrl = new ArrayList<>(Arrays.asList(input.trim().split(" ", 3)));
         if (moduleDescriptionUrl.size() == 2) {
             moduleDescriptionUrl.add(0, "");  // No entry for module
         }
         if (moduleDescriptionUrl.size() != 3) {
-            throw new DukeException(DukeExceptionType.INVALID_BOOKMARK_INPUT);
+            throw new DukeException(DukeExceptionType.INVALID_ADD_BOOKMARK_INPUT);
         }
-        if (moduleDescriptionUrl.get(1).isBlank() || moduleDescriptionUrl.get(2).isBlank()) {
+        if (moduleDescriptionUrl.get(1).isBlank()) {
             throw new DukeException(DukeExceptionType.EMPTY_DESCRIPTION);
         }
         if (!isUrlValid(moduleDescriptionUrl.get(2))) {
@@ -62,7 +66,7 @@ public class Bookmark {
 
     private static Boolean isUrlValid(String url) {
         boolean isValid = false;
-        if (url.startsWith("www.") || url.startsWith("https://")) {
+        if (url.startsWith("www.") || url.startsWith("https://") || url.contains(" ")) {
             isValid = true;
         }
         return isValid;
@@ -70,6 +74,8 @@ public class Bookmark {
 
     /**
      * This method opens the URL of the bookmark in a web browser.
+     *
+     * @throws DukeException if there is an error launching the URL.
      */
     public void launch() throws DukeException {
         try {
@@ -141,10 +147,24 @@ public class Bookmark {
         return  ("[" + module + "] " + description + " " +  url + System.lineSeparator());
     }
 
+    /**
+     * Returns the data of the bookmark in a string.
+     *
+     * @return a string containing the information of the bookmark.
+     */
     public String getExport() {
         return module + SEPARATOR + description + SEPARATOR + url;
     }
 
+    /**
+     * Returns the bookmark instance which is created from the data read from the bookmark text file.
+     * This class level method is called at the start of the program to initialize the bookmark.
+     *
+     * @param data The string containing information of the bookmark.
+     * @return the bookmark instance.
+     * @throws DukeException if the URL is invalid.
+     * @throws IndexOutOfBoundsException if the data format is invalid.
+     */
     public static Bookmark initBookmark(String data) throws DukeException {
         List<String> details =  Arrays.asList(data.split("\\|"));
         String module = details.get(0).trim();

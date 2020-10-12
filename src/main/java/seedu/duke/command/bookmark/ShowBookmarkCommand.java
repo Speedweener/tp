@@ -19,7 +19,7 @@ public class ShowBookmarkCommand extends Command {
 
     @Override
     public void execute(BookmarkList bookmarks, SlotList slotList, Ui ui,
-                        Storage bookmarkStorage, Storage slotStorage) throws DukeException {
+                        Storage bookmarkStorage, Storage slotStorage) {
         ui.print(bookmarks.showBookmarks());
     }
 }

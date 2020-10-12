@@ -47,6 +47,13 @@ class BookmarkTest {
     }
 
     @Test
+    void extractModuleDescriptionAndUrl_invalidAddBookmarkFormat_throwsDukeException() {
+        String input = "add something";
+        DukeException e = assertThrows(DukeException.class, () -> Bookmark.extractModuleDescriptionAndUrl(input));
+        assertEquals(DukeExceptionType.INVALID_ADD_BOOKMARK_INPUT, e.getError());
+    }
+
+    @Test
     void getUrl_validModuleDescriptionAndUrl_returnsUrl() {
         String module = "CS2113T";
         String description = "something";
@@ -65,12 +72,25 @@ class BookmarkTest {
     }
 
     @Test
-    void initBookmark_validDataString_bookmark() throws DukeException {
+    void initBookmark_validDataString_returnsBookmark() throws DukeException {
         String data = "CS2113T | tutorial | www.google.com";
         String module = "CS2113T";
         String description = "tutorial";
         String url = "www.google.com";
         Bookmark expectedBookmark = new Bookmark(module, description, url);
         assertEquals(expectedBookmark.getBookmarkAsString(), Bookmark.initBookmark(data).getBookmarkAsString());
+    }
+
+    @Test
+    void initBookmark_missingSeparator_throwsIndexOutOfBoundsException() {
+        String data = "CS2113T | tutorial www.google.com";
+        assertThrows(IndexOutOfBoundsException.class, () -> Bookmark.initBookmark(data));
+    }
+
+    @Test
+    void initBookmark_invalidUrl_throwsDukeException() {
+        String data = "CS2113T | tutorial | google.com";
+        DukeException e = assertThrows(DukeException.class, () -> Bookmark.initBookmark(data));
+        assertEquals(DukeExceptionType.INVALID_URL, e.getError());
     }
 }

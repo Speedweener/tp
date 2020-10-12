@@ -1,6 +1,5 @@
 package seedu.duke.command.bookmark;
 
-import seedu.duke.ItemList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.bookmark.Bookmark;
@@ -12,14 +11,13 @@ import seedu.duke.slot.SlotList;
 
 public class DeleteBookmarkCommand extends Command {
     public static final String DEL_KW = "delete";
-    private int index;
-
+    private final int index;
 
     /**
      * Constructs a new DeleteBookmarkCommand instance and stores the information of the bookmark given by the input.
      *
      * @param command The user input command.
-     * @throws DukeException thrown if input command is invalid.
+     * @throws DukeException thrown if input command is invalid or if the bookmark number is invalid.
      */
     public DeleteBookmarkCommand(String command) throws DukeException {
         String details = command.substring(DEL_KW.length());
@@ -28,25 +26,27 @@ public class DeleteBookmarkCommand extends Command {
         }
         try {
             index = Integer.parseInt(details.trim()) - 1;
-        } catch (NullPointerException | NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException(DukeExceptionType.INVALID_BOOKMARK_NUMBER);
         }
     }
 
-
     /**
      * Deletes the bookmark in the bookmark list.
      *
-
      * @param bookmarks The list of bookmarks.
+     * @param slotList The list of slots.
      * @param ui The user interface.
+     * @param bookmarkStorage The storage for saving and loading bookmarks.
+     * @param slotStorage The storage for saving and loading slots.
+     * @throws DukeException if the bookmark number is invalid or if there is an error when saving the bookmark.
      */
     @Override
     public void execute(BookmarkList bookmarks, SlotList slotList, Ui ui,
                         Storage bookmarkStorage, Storage slotStorage) throws DukeException {
         try {
             Bookmark bookmark = bookmarks.getBookmark(index);
-            bookmarks.deleteBookmark(bookmarks.getBookmark(index));
+            bookmarks.deleteBookmark(bookmark);
             ui.print(getMessage(bookmark));
             bookmarkStorage.save(bookmarks.getData());
         } catch (IndexOutOfBoundsException e) {

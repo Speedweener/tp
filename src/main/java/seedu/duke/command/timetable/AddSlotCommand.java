@@ -37,7 +37,7 @@ public class AddSlotCommand extends Command {
             startTime = LocalTime.parse(parts[1]);
             endTime = LocalTime.parse(parts[2]);
             day = parts[3];
-            title = command.substring(command.indexOf(parts[3]) + parts[3].length());
+            title = command.substring(command.indexOf(parts[3]) + parts[3].length()).trim();
         } catch (DateTimeParseException e) {
             throw new DukeException(DukeExceptionType.INVALID_TIME_FORMAT);
         } catch (IndexOutOfBoundsException e) {

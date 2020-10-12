@@ -16,15 +16,14 @@ public class FindBookmarkCommand extends Command {
     public static final String FIND_KW = "find";
     private final List<String> moduleAndDescription;
 
-
     /**
-     * Constructs a new FindBookmarkCommand instance and and gets the module and description
-     * to be searched.
+     * Constructs a new FindBookmarkCommand instance and gets the module and description to be searched.
      * If only one term is entered (term meaning string without a space), method asserts
-     * this to be the module and inserts an empty description
+     * this to be the module and inserts an empty description.
+     *
      * @param command The command input by the user.
+     * @throws DukeException if the input is unknown.
      */
-
     public FindBookmarkCommand(String command) throws DukeException {
         String details = command.substring(FIND_KW.length());
         if (!details.startsWith(" ")) {
@@ -37,11 +36,13 @@ public class FindBookmarkCommand extends Command {
     }
 
     /**
-     * prints the matching bookmark.
+     * Prints the bookmark with the matching keyword.
      *
      * @param bookmarks The list of bookmarks.
+     * @param slotList The list of slots.
      * @param ui The user interface.
-     * @param slotStorage The storage for saving and loading.
+     * @param bookmarkStorage The storage for saving and loading bookmarks.
+     * @param slotStorage The storage for saving and loading slots.
      */
     @Override
     public void execute(BookmarkList bookmarks, SlotList slotList, Ui ui,

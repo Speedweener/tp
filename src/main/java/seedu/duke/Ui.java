@@ -75,38 +75,35 @@ public class Ui {
      */
     public void showErrorMessage(DukeException dukeException) {
         switch (dukeException.getError()) {
-        case FULL_TASK_LIST:
-            //printFullTaskListMessage();
-            break;
         case UNKNOWN_INPUT:
             printUnknownInputMessage();
             break;
-        case INVALID_BOOKMARK_NUMBER:
-            printUseValidTaskNumberMessage(dukeException.getInfo());
+        case INVALID_MODE:
+            printUnknownModeMessage();
             break;
         case WRITE_FILE_ERROR:
             printErrorWritingToFile();
             break;
+        case INVALID_ADD_BOOKMARK_INPUT:
+            printInvalidAddBookmarkInputMessage();
+            break;
         case EMPTY_DESCRIPTION:
             printEmptyBookmarkDescriptionMessage();
             break;
-        case ERROR_LAUNCHING_URL:
-            printErrorLaunchUrlMessage();
-            break;
-        case INVALID_BOOKMARK_INPUT:
-            printInvalidBookmarkInputMessage();
+        case INVALID_BOOKMARK_NUMBER:
+            printUseValidBookmarkNumberMessage(dukeException.getInfo());
             break;
         case INVALID_URL:
             printInvalidUrl();
             break;
-        case INVALID_SLOT_INPUT:
-            printInvalidSlotInput();
+        case ERROR_LAUNCHING_URL:
+            printErrorLaunchUrlMessage();
             break;
         case INVALID_TIME_FORMAT:
             printInvalidTimeFormat();
             break;
-        case INVALID_MODE:
-            printUnknownModeMessage();
+        case INVALID_SLOT_INPUT:
+            printInvalidSlotInput();
             break;
         case INVALID_TIMETABLE_DAY:
             printUnknownDayMessage();
@@ -124,7 +121,7 @@ public class Ui {
         print("Error writing to file.\n");
     }
 
-    private void printUseValidTaskNumberMessage(String info) {
+    private void printUseValidBookmarkNumberMessage(String info) {
         print("Please enter a valid index number between 1 and " + info + "\n");
     }
 
@@ -136,7 +133,7 @@ public class Ui {
         print("Invalid url\n");
     }
 
-    private void printInvalidBookmarkInputMessage() {
+    private void printInvalidAddBookmarkInputMessage() {
         print("Invalid bookmark input\n");
     }
 
@@ -159,10 +156,6 @@ public class Ui {
 
     private void printEmptyTimetableMessage() {
         print("Timetable is empty\n");
-    }
-
-    private void printMatchingBookmarks(String message) {
-        print("Invalid url\n");
     }
 
     private void printInvalidSlotInput() {

@@ -2,6 +2,7 @@ package seedu.duke.bookmark;
 
 import seedu.duke.ItemList;
 import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeExceptionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +54,12 @@ public class BookmarkList extends ItemList {
     }
 
     private void loadBookmark(String line) {
-        logger.entering(getClass().getName(), "loadBookmark");
         try {
             bookmarks.add(Bookmark.initBookmark(line));
         } catch (IndexOutOfBoundsException | DukeException e) {
             // Invalid task data, skips to the next entry
             logger.log(Level.WARNING, "invalid bookmark data found in file: " + line, e);
         }
-        logger.exiting(getClass().getName(), "loadBookmark");
     }
 
     /**
@@ -90,6 +89,7 @@ public class BookmarkList extends ItemList {
      *
      * @param index The index of the bookmark in the list.
      * @return The bookmark with the corresponding index in the list.
+     * @throws DukeException if the index is out of range.
      */
     public Bookmark getBookmark(int index) {
         assert index<=bookmarks.size() : "Index exceeds size of bookmark list!";
@@ -111,9 +111,14 @@ public class BookmarkList extends ItemList {
      * This method deletes the bookmark from the list.
      *
      * @param bookmark The bookmark to be deleted.
+     * @throws NullPointerException if the bookmark does not exist in the list.
      */
-    public void deleteBookmark(Bookmark bookmark) {
-        bookmarks.remove(bookmark);
+    public void deleteBookmark(Bookmark bookmark) throws DukeException {
+        try {
+            bookmarks.remove(bookmark);
+        } catch (NullPointerException e) {
+            throw new DukeException(DukeExceptionType.INVALID_BOOKMARK_NUMBER);
+        }
     }
 
     /**
@@ -137,25 +142,33 @@ public class BookmarkList extends ItemList {
      * @return The string message containing the matching bookmarks
      */
     public String findBookmarks(List<String> list) {
-        if (bookmarks.size() == 0) {
-            return ("Empty List");
-        }
-
-        String module = list.get(0).toUpperCase();
-        String description = list.get(1).toUpperCase();
         String message = "";
+        if (bookmarks.size() == 0) {
+            message = "Empty List" + lineSeparator;
+        } else {
+            String module = list.get(0).toUpperCase();
+            String description = list.get(1).toUpperCase();
 
+            message = getMatchingBookmarks(module, description);
+
+            if (!message.isEmpty()) {
+                message = "Here are your matching bookmarks" + lineSeparator + message;
+            } else {
+                message = "No bookmarks contain the specified keyword!" + lineSeparator;
+            }
+        }
+        return message;
+    }
+
+    private String getMatchingBookmarks(String module, String description) {
+        String message = "";
         for (int i = 0; i < bookmarks.size(); i++) {
             if (bookmarks.get(i).getModule().toUpperCase().contains(module)
                     && bookmarks.get(i).getDescription().toUpperCase().contains(description)) {
                 message += (i + 1) + "." + bookmarks.get(i).getBookmarkAsString() + lineSeparator;
             }
         }
-
-        if (message.isEmpty()) {
-            return  "No bookmarks contain the specified keyword!" + lineSeparator;
-        }
-        return "Here are your matching bookmarks" + lineSeparator + message;
+        return message;
     }
 
     /**
@@ -166,29 +179,41 @@ public class BookmarkList extends ItemList {
      * @return The string message containing the matching bookmarks
      */
     public String launchBookmarks(List<String> list) {
-        if (bookmarks.size() == 0) {
-            return ("Empty List");
-        }
-
-        String module = list.get(0).toUpperCase();
-        String description = list.get(1).toUpperCase();
         String message = "";
+        if (bookmarks.size() == 0) {
+            message = "Empty List" + lineSeparator;
+        } else {
+            String module = list.get(0).toUpperCase();
+            String description = list.get(1).toUpperCase();
 
+            message = launchMatchingBookmarks(module, description);
+
+            if (!message.isEmpty()) {
+                message = "Launched these bookmarks:" + lineSeparator + message;
+            } else {
+                message = "No bookmarks contain the specified keyword!" + lineSeparator;
+            }
+        }
+        return message;
+    }
+
+    private String launchMatchingBookmarks(String module, String description) {
+        String message = "";
+        String errorMessage = "";
         for (int i = 0; i < bookmarks.size(); i++) {
             if (bookmarks.get(i).getModule().toUpperCase().contains(module)
                     && bookmarks.get(i).getDescription().toUpperCase().contains(description)) {
-                message += (i + 1) + "." + bookmarks.get(i).getBookmarkAsString() + lineSeparator;
                 try {
                     bookmarks.get(i).launch();
+                    message += (i + 1) + "." + bookmarks.get(i).getBookmarkAsString() + lineSeparator;
                 } catch (DukeException e) {
-                    e.printStackTrace();
+                    errorMessage += (i + 1) + "." + bookmarks.get(i).getBookmarkAsString() + lineSeparator;
                 }
             }
         }
-
-        if (message.isEmpty()) {
-            return  "No bookmarks contain the specified keyword!" + lineSeparator;
+        if (!errorMessage.isBlank()) {
+            message += "Failed to launch these bookmarks:" + lineSeparator + errorMessage;
         }
-        return "Launched these bookmarks:" + lineSeparator + message;
+        return message;
     }
 }
