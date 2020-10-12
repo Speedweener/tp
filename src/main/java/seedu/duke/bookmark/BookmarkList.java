@@ -93,7 +93,7 @@ public class BookmarkList extends ItemList {
      */
     public Bookmark getBookmark(int index) {
         assert index <= bookmarks.size() : "Index exceeds size of bookmark list!";
-        assert index >0 : "Index entered is invalid!";
+        assert index > 0 : "Index entered is invalid!";
 
         return bookmarks.get(index);
     }
