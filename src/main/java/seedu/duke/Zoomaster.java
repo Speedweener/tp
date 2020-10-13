@@ -5,7 +5,7 @@ import seedu.duke.slot.SlotList;
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 
-public class Duke {
+public class Zoomaster {
 
     private Storage bookmarkStorage;
     private Storage slotStorage;
@@ -20,7 +20,7 @@ public class Duke {
      * @param bookmarkFilePath The filepath of the bookmark txt file.
      * @param slotFilePath The filepath of the slot txt file.
      */
-    public Duke(String bookmarkFilePath, String slotFilePath) {
+    public Zoomaster(String bookmarkFilePath, String slotFilePath) {
         ui = new Ui();
         bookmarkStorage = new Storage(bookmarkFilePath);
         slotStorage = new Storage(slotFilePath);
@@ -65,6 +65,6 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("./data/data.txt", "./data/slot.txt").run();
+        new Zoomaster("./data/data.txt", "./data/slot.txt").run();
     }
 }
