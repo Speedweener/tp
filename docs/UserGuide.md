@@ -1,3 +1,4 @@
+
 # User Guide  
   
 ## Introduction  
@@ -12,13 +13,13 @@ If you can type fast, Zoomaster can help fetch useful website links for you quic
   * [Global](#global)  
     * [Switch mode:](#mode) **mode**
     *  [Exit:](#exit)  **exit**   
-  * [Bookmark mode](#bookmark-mode)  
+  * [Bookmark mode](#bookmarkmode)  
     * [Show bookmarks:](#showbookmark) **show**
     * [Add bookmark:](#addbookmark)  **add**   
     * [Delete bookmark:](#deletebookmark)  **delete** 
     * [Find bookmark:](#findbookmark)  **find** 
     * [Launch bookmark:](#launchbookmark)  **launch** 
-   * [Timetable mode](#timetable-mode)  
+   * [Timetable mode](#timetablemode)  
 * [FAQ](#faq)  
 * [Command Summary](#command-summary)  
   
@@ -31,9 +32,11 @@ If you can type fast, Zoomaster can help fetch useful website links for you quic
   
 ## Features   
 {Give detailed description of each feature}  
- 
- ###Global
+
+ <a name="global"></a> 
+ ### Global
  The commands below can be used in both modes of the app.   
+ 
 <a name="mode"></a>  
 #### Switch mode: `mode`  
 Switches between the “bookmark” and “timetable” modes. Depending on the mode,   
@@ -59,18 +62,18 @@ Exits the application
   
 
   <br/><br/> 
-  <a name="bookmark-mode"></a>  
-###Bookmark mode  
+  <a name="bookmarkmode"></a>  
+### Bookmark mode  
 
   <a name="showbookmark"></a>  
-####Show bookmarks: `show`  
+#### Show bookmarks: `show`  
 Prints all bookmark in the bookmark list  
   
     Format: show
 
   
 <a name="addbookmark"></a>  
-####Add bookmark: `add`  
+#### Add bookmark: `add`  
 Add a URL bookmark under a certain topic and description.  
   
     Format: add {MODULE(optional)} {DESCRIPTON} {URL}
@@ -86,7 +89,7 @@ Example of usage:
 `add website https://cs2113t.nus.edu.sg/`  
 
 <a name="deletebookmark"></a>  
-####Delete bookmarks: `delete`  
+#### Delete bookmarks: `delete`  
 Deletes a bookmark with the specified index.  The index will correspond to the index of that bookmark in the list. You can do a `show` command to check the bookmark indexes.  
   
     Format: delete {INDEX}
@@ -98,7 +101,7 @@ Example of usage:
 * `delete 4`  
 
 <a name="findbookmark"></a>  
-####Find bookmarks: `find`  
+#### Find bookmarks: `find`  
 Finds bookmarks with matching module and description and prints them
   
     Format: find {MODULE} {DESCRIPTION(optional)}
@@ -114,7 +117,7 @@ Example of usage:
 * `find CS2113`  
 
 <a name="launchbookmark"></a>  
-####Launch bookmarks: `launch`  
+#### Launch bookmarks: `launch`  
 Launches bookmarks in the default browser using either:
 * Index
 * Matching module or description
@@ -136,7 +139,7 @@ Example of usage:
   
   <br/><br/> 
 <a name="timetablemode"></a>  
-###Timetable mode    
+### Timetable mode    
   
   
 ## FAQ  
