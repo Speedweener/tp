@@ -68,7 +68,7 @@ public class Parser {
             command = new ClearCommand();
         } else if (input.startsWith(HelpCommand.HELP_KW)) {
             command = new HelpCommand(input);
-        } else if (input.startsWith(ShowSettingsCommand.SHOW_KW)) {
+        } else if (input.compareToIgnoreCase(ShowSettingsCommand.SHOW_KW) == 0) {
             command = new ShowSettingsCommand();
         } else if (input.startsWith(SetSettingsCommand.SET_KW)) {
             command = new SetSettingsCommand(input);
@@ -88,7 +88,7 @@ public class Parser {
     //@@author TYS0n1
     private static Command createBookmarkCommand(String input) throws ZoomasterException {
 
-        if (input.startsWith(ShowBookmarkCommand.SHOW_KW)) {
+        if (input.compareToIgnoreCase(ShowBookmarkCommand.SHOW_KW) == 0) {
             return new ShowBookmarkCommand();
         } else if (input.startsWith(DeleteBookmarkCommand.DEL_KW)) {
             return new DeleteBookmarkCommand(input);
