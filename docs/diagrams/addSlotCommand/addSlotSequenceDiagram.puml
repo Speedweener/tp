@@ -1,0 +1,102 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+participant ":AddSlotCommand" as AddSlotCommand
+participant ":Timetable" as Timetable
+participant ":Module" as Module
+participant ":Slot" as Slot
+participant ":Bookmark" as Bookmark
+participant ":Ui" as Ui
+
+
+[-> AddSlotCommand : execute(bookmarks, timetable, ui)
+activate AddSlotCommand
+
+AddSlotCommand -> Timetable : moduleExists(moduleCode)
+activate Timetable
+
+Timetable --> AddSlotCommand
+deactivate Timetable
+
+ref over AddSlotCommand, Module
+    Get module if it exists, else create a new module
+end ref
+
+opt commands is not null
+    loop loop through commands
+        AddSlotCommand -> AddSlotCommand : createSlotAndBookmark\n(module, command)
+        activate AddSlotCommand
+
+        AddSlotCommand -> AddSlotCommand : create(command, module)
+        activate AddSlotCommand
+
+        AddSlotCommand -> AddSlotCommand : isAddModuleBookmark\n(slotAndBookmark)
+        activate AddSlotCommand
+
+        AddSlotCommand --> AddSlotCommand : boolean
+        deactivate AddSlotCommand
+
+        alt add module bookmark
+
+
+            ref over AddSlotCommand, Bookmark
+                Create bookmark for module
+            end ref
+
+
+        else add bookmark \nto existing slot \nbased on index
+
+
+            ref over AddSlotCommand, Bookmark
+                Create bookmark for existing slot based on its index
+            end ref
+
+        else add slot
+
+            AddSlotCommand -> Module : slotExists(lesson, day, startTime, endTime)
+            activate Module
+
+            Module --> AddSlotCommand : boolean
+            deactivate Module
+
+            ref over AddSlotCommand, Slot
+                Get slot if it exists, else create a new slot
+
+            end ref
+
+            AddSlotCommand -> AddSlotCommand : checkForAndAddBookmarkToSlot\n(slotAndBookmark, lesson, slot)
+            activate AddSlotCommand
+
+            ref over AddSlotCommand, Bookmark
+                Create bookmark for slot
+            end ref
+
+            AddSlotCommand --> AddSlotCommand : message
+            deactivate AddSlotCommand
+        end
+
+
+        AddSlotCommand --> AddSlotCommand : message
+        deactivate AddSlotCommand
+
+        AddSlotCommand --> AddSlotCommand : message
+        deactivate AddSlotCommand
+    end
+end
+
+
+AddSlotCommand -> Ui : print(message)
+activate Ui
+
+Ui --> AddSlotCommand
+deactivate Ui
+
+AddSlotCommand -->[
+deactivate AddSlotCommand
+
+
+
+
+
+@enduml

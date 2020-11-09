@@ -1,0 +1,39 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd Create bookmark for module
+
+participant ":AddSlotCommand" as AddSlotCommand
+'participant ":Timetable" as Timetable
+participant ":Module" as Module
+'participant ":Module" as ModuleNew
+'participant ":Slot" as Slot
+'participant ":Slot" as SlotNew
+'participant ":Bookmark" as BookmarkSlot
+participant ":Bookmark" as BookmarkModule
+'participant ":Ui" as Ui
+
+activate AddSlotCommand
+
+AddSlotCommand -> AddSlotCommand : addBookmarkToModule\n(module, slotAndBookmark)
+activate AddSlotCommand
+
+AddSlotCommand -> BookmarkModule ** : new Bookmark(description, url)
+activate BookmarkModule
+
+BookmarkModule --> AddSlotCommand
+deactivate BookmarkModule
+
+AddSlotCommand -> Module : addBookmark(bookmark)
+activate Module
+
+Module --> AddSlotCommand
+deactivate Module
+
+AddSlotCommand --> AddSlotCommand : message
+deactivate AddSlotCommand
+
+
+
+@enduml

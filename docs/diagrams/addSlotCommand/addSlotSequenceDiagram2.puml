@@ -1,0 +1,49 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd Get module if it exists, else create a new module
+
+participant ":AddSlotCommand" as AddSlotCommand
+participant ":Timetable" as Timetable
+participant ":Module" as Module
+participant ":Module" as ModuleNew
+
+activate AddSlotCommand
+
+alt module exists
+    AddSlotCommand -> Timetable : getModule(moduleCode)
+    activate Timetable
+
+    loop loop through \nmodules
+
+        opt is module
+            Timetable -> Module : isModule(moduleCode)
+            activate Module
+
+            Module --> Timetable : boolean
+            deactivate Module
+        end opt
+
+    end loop
+
+    Timetable --> AddSlotCommand : module
+    deactivate Timetable
+
+else module does \nnot exist
+    AddSlotCommand -> Timetable : addModule(moduleCode)
+    activate Timetable
+
+    Timetable -> ModuleNew ** : create(moduleCode)
+    activate ModuleNew
+
+    ModuleNew --> Timetable
+    deactivate ModuleNew
+
+    Timetable --> AddSlotCommand : module
+    deactivate Timetable
+end
+
+deactivate AddSlotCommand
+
+@enduml

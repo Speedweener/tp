@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd delete slot
+
+participant ":DeleteSlotCommand" as DeleteSlotCommand
+participant ":Module" as Module
+participant ":Slot" as Slot
+
+activate DeleteSlotCommand
+
+DeleteSlotCommand -> Module : getSlot(slotIndex)
+activate Module
+
+Module --> DeleteSlotCommand : slot
+deactivate Module
+
+DeleteSlotCommand -> Module : removeSlot(slot)
+activate Module
+
+Module -> Slot : remove(slot)
+activate Slot
+
+Slot --> Module
+deactivate Slot
+destroy Slot
+
+Module --> DeleteSlotCommand
+deactivate Module
+
+
+
+@enduml

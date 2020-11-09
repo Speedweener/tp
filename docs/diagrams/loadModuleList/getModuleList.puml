@@ -1,0 +1,81 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+participant ":Zoomaster" as Zoomaster
+participant ":Storage" as Storage
+participant "<<class>> :Module" as Module
+
+
+activate Zoomaster
+Zoomaster-> Storage : loadModuleList()
+activate Storage
+
+
+
+alt try reading from local file
+
+    loop while next line is not null
+         Storage -> Storage : moduleList.add(string)
+
+    end loop
+
+    opt moduleList is empty
+    note right of Storage : throws FileNotFoundException
+    end opt
+
+
+else FileNotFoundException
+    Storage -> Storage : nusModuleListFromNusMods()
+    activate Storage
+        Storage -> Storage : getNusModsUrl()
+
+        activate Storage
+            Storage --> Storage : url
+        deactivate Storage
+
+        opt connection is not successful
+            Storage --> Storage : null
+            deactivate Storage
+        end opt
+
+            Storage -> Storage :
+        activate Storage
+
+            loop while next line is not null
+                 Storage -> Storage : jsonAsString.append(sc.nextLine())
+
+            end loop
+            Storage -> Storage : jsonToArrayList(jsonAsString)
+            activate Storage
+
+                loop moduleArray.size
+                Storage -> Storage : moduleList.add(moduleCode)
+                end loop
+                Storage --> Storage : moduleList
+
+            deactivate Storage
+            Storage --> Storage : moduleList
+            deactivate Storage
+
+
+                opt moduleList is not null
+                    Storage -> Storage : saveModuleList(moduleListPath, moduleList)
+                    activate Storage
+                    deactivate Storage
+                end opt
+        end alt
+
+                Storage --> Zoomaster : moduleList
+
+        deactivate Storage
+
+
+
+
+Zoomaster -> Module : setModuleList(moduleList)
+activate Module
+deactivate Module
+
+
+@enduml

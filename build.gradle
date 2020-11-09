@@ -14,6 +14,7 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
     implementation(group: 'org.fusesource.jansi', name: 'jansi', version: '1.18')
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation(group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1')
 }
 
 test {
@@ -31,11 +32,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.zoomaster.Zoomaster"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "zoomaster"
     archiveClassifier = null
 }
 
@@ -45,4 +46,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

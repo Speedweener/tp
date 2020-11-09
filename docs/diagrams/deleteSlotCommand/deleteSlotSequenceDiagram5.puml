@@ -1,0 +1,36 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd delete slot bookmarks
+
+participant ":DeleteSlotCommand" as DeleteSlotCommand
+participant ":Module" as Module
+participant ":Slot" as Slot
+participant ":BookmarkList" as BookmarkList
+participant ":BookmarkList" as oldBookmarkList
+
+activate DeleteSlotCommand
+
+DeleteSlotCommand -> Module : getSlot(slotIndex)
+activate Module
+
+Module --> DeleteSlotCommand : slot
+deactivate Module
+
+DeleteSlotCommand -> Slot : removeAllBookmarks()
+activate Slot
+
+Slot -> BookmarkList** : new BookmarkList()
+activate BookmarkList
+
+BookmarkList --> Slot
+deactivate BookmarkList
+
+destroy oldBookmarkList
+note right of oldBookmarkList : create new BookmarkList\nlose reference of old BookmarkList
+
+Slot --> DeleteSlotCommand
+deactivate Slot
+
+@enduml

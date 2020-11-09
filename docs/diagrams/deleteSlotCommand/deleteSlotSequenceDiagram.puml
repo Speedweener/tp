@@ -1,0 +1,63 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+participant ":DeleteSlotCommand" as DeleteSlotCommand
+participant ":Timetable" as Timetable
+participant ":Module" as Module
+participant ":Slot" as Slot
+participant ":Bookmark" as Bookmark
+participant ":Ui" as Ui
+
+[-> DeleteSlotCommand : execute(bookmarks, timetable, ui)
+activate DeleteSlotCommand
+
+alt module does not exist
+
+    note right of DeleteSlotCommand : throws exception
+
+else module exists
+
+    DeleteSlotCommand -> Timetable : getModule(moduleCode)
+    activate Timetable
+
+    Timetable --> DeleteSlotCommand : module
+    deactivate Timetable
+
+    alt delete module
+
+        ref over DeleteSlotCommand, Module
+            delete module
+        end ref
+
+    else delete slot
+
+        ref over DeleteSlotCommand, Slot
+            delete slot
+        end ref
+
+    else delete module bookmarks
+
+        ref over DeleteSlotCommand, Bookmark
+            delete module bookmarks
+        end ref
+
+    else delete slot bookmarks
+
+        ref over DeleteSlotCommand, Bookmark
+            delete slot bookmarks
+        end ref
+
+    end
+end
+
+DeleteSlotCommand -> Ui : print(message)
+activate Ui
+
+Ui --> DeleteSlotCommand
+deactivate Ui
+
+DeleteSlotCommand -->[
+deactivate DeleteSlotCommand
+
+@enduml

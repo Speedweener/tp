@@ -1,0 +1,88 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+mainframe details not empty
+
+participant "<<class>> :Parser" as Parser
+participant ":HelpCommand" as HelpCommand
+participant ":Ui" as Ui
+
+
+
+
+activate HelpCommand
+
+    HelpCommand -> Ui : printHelpMessage(details)
+    activate Ui
+    Ui -> Parser :
+    activate Parser
+    Parser --> Ui : programMode
+    deactivate Parser
+
+
+
+    alt details == CLEAR_KW
+    Ui -> Ui : printYellowWithBorder(ClearCommandDetails)
+        activate Ui
+        deactivate Ui
+
+    else details == EXIT_KW
+    Ui -> Ui : printYellowWithBorder(ExitCommandDetails)
+        activate Ui
+        deactivate Ui
+
+    else details == MODE_KW
+    Ui -> Ui : printYellow(ModeCommandDetails)
+        activate Ui
+        deactivate Ui
+    Ui -> Ui : printCyan(ModeCommandFormat)
+        activate Ui
+        deactivate Ui
+
+    else details == LAUNCH_NOW_KW
+    Ui -> Ui : printYellow(LaunchNowCommandDetails)
+        activate Ui
+        deactivate Ui
+    Ui -> Ui : printCyan(LaunchNowCommandFormat)
+        activate Ui
+        deactivate Ui
+
+    else details == SHOW_KW
+    Ui -> Ui : printYellow(ShowCommandDetails)
+        activate Ui
+        deactivate Ui
+    Ui -> Ui : printCyan(ShowCommandFormat)
+        activate Ui
+        deactivate Ui
+
+    else details == SET_KW
+    Ui -> Ui : printYellow(SetCommandDetails)
+        activate Ui
+        deactivate Ui
+    Ui -> Ui : printCyan(SetCommandFormat)
+        activate Ui
+        deactivate Ui
+    Ui -> Ui : printGreen(SetCommandExample)
+        activate Ui
+        deactivate Ui
+
+    else programMode == 1
+    Ui -> Ui : printModeOneExtendedHelp(details)
+            activate Ui
+            deactivate Ui
+
+    else programMode == 2
+    Ui -> Ui : printModeTwoExtendedHelp(details)
+            activate Ui
+            deactivate Ui
+
+    else programMode == 3
+    Ui -> Ui : printModeThreeExtendedHelp(details)
+            activate Ui
+            deactivate Ui
+
+    end alt
+    deactivate Ui
+
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd Create bookmark for slot
+
+participant ":AddSlotCommand" as AddSlotCommand
+participant ":Slot" as Slot
+participant ":Bookmark" as BookmarkSlot
+
+activate AddSlotCommand
+
+alt valid url
+    AddSlotCommand -> AddSlotCommand : createBookmark(url, lesson, slot)
+    activate AddSlotCommand
+
+    opt invalid url
+        note right of AddSlotCommand : throw exception
+    end
+
+    AddSlotCommand -> BookmarkSlot ** : create(lesson, url)
+    activate BookmarkSlot
+
+    BookmarkSlot --> AddSlotCommand
+    deactivate BookmarkSlot
+
+    AddSlotCommand -> Slot : addBookmark(bookmark)
+    activate Slot
+
+    Slot --> AddSlotCommand
+    deactivate Slot
+
+    AddSlotCommand --> AddSlotCommand
+    deactivate AddSlotCommand
+else invalid url
+    note right of AddSlotCommand : throw exception
+end
+
+deactivate AddSlotCommand
+
+@enduml

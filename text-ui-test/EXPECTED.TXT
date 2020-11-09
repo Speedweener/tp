@@ -1,21 +1,20 @@
 ____________________________________________________________
 
-HELLO FROM:
+				  ++++{  WELCOME TO  }++++
 
                                                                                                  
-                                            ███████                                              
-                                      ██████████████████                                         
-                                    ███████████████████████                                      
-                                  ███████████████████████████                                    
-                                 ████             █████  █████                                   
-                                █████              █     ██████                                  
-                                █████              █     ██████                                  
-                                █████              █     ██████                                  
-                                 █████             ████  █████                                   
-                                  ███████████████████████████                                    
-                                   █████████████████████████                                     
-                                      ███████████████████                                        
-                                          ███████████                                            
+                                  ████████████████████████████                                   
+                                ████████████████████████████████                                 
+                                ██████       ███████     █ █████                                 
+                                ███████    █ ██████     █ ██████                                 
+                                ███████  ▌  █ █████ █   █ ██████                                 
+                                ███████  ▌   █ ███ █    █ ██████                                 
+                                ███████  ▌█   █ █   █   █ ██████                                 
+                                ███████  ▌██   █   ██   █ ██████                                 
+                                ███████  ▌███     ███   █ ██████                                 
+                                ██████    ████   ███    █  █████                                 
+                                ████████████████████████████████                                 
+                                  ████████████████████████████                                   
                                                                          ██                      
 █████████   ███████     ████████   ███████ ███████     █████     █████  █████   █████     █ ████ 
      ███  ██      ███  ██      ███ ██     ██     ██         ██  ██       ██   ██      ██  ██   ██
@@ -27,260 +26,119 @@ HELLO FROM:
 ____________________________________________________________
 
 [Main Menu] Input: ____________________________________________________________
-Unknown input
-Available inputs in Main menu are
-1) mode {bookmark/timetable}
-2) exit
-____________________________________________________________
-
-[Main Menu] Input: ____________________________________________________________
 Changing to bookmark mode
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-Unknown input
-Available inputs in Bookmark mode are
-1) add
-2) delete
-3) show
-4) find
-5) launch
-6) mode timetable
-7) exit
+Here are the bookmarks in your list:
+Bookmark list is empty
+
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
 
-Invalid URL
-URL must start with either 'www.' or 'https://' and have no spaces
+Bookmark list is empty!
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-
-Invalid URL
-URL must start with either 'www.' or 'https://' and have no spaces
+Added bookmark: [description] www.bookmark.com
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-Added bookmark: [noModule] www.google.com
+Here are the bookmarks in your list:
+  1.[description] www.bookmark.com
+
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-Unknown input
-Available inputs in Bookmark mode are
-1) add
-2) delete
-3) show
-4) find
-5) launch
-6) mode timetable
-7) exit
+Added bookmark: [description2] www.bookmark2.com
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
+Here are the bookmarks in your list:
+  1.[description] www.bookmark.com
+  2.[description2] www.bookmark2.com
 
-Please enter a valid index number between 1 and 1
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-Unknown input
-Available inputs in Bookmark mode are
-1) add
-2) delete
-3) show
-4) find
-5) launch
-6) mode timetable
-7) exit
+I've deleted this bookmark!:
+[description] www.bookmark.com
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
+Here are the bookmarks in your list:
+  1.[description2] www.bookmark2.com
 
-Invalid bookmark input
-Format: add {module(optional)} {description} {URL}
 ____________________________________________________________
 
 [Bookmark mode] Input: ____________________________________________________________
-
-Invalid URL
-URL must start with either 'www.' or 'https://' and have no spaces
-____________________________________________________________
-
-[Bookmark mode] Input: ____________________________________________________________
-
-Invalid URL
-URL must start with either 'www.' or 'https://' and have no spaces
-____________________________________________________________
-
-[Bookmark mode] Input: ____________________________________________________________
-
-Invalid URL
-URL must start with either 'www.' or 'https://' and have no spaces
-____________________________________________________________
-
-[Bookmark mode] Input: ____________________________________________________________
-Unknown input
-Available inputs in Bookmark mode are
-1) add
-2) delete
-3) show
-4) find
-5) launch
-6) mode timetable
-7) exit
+Changing to timetable mode
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-module does not exist
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-cs2113 added
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-
-Timetable is empty
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-
-Timetable is empty
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-no slots for CS2113
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-no bookmarks found in module
-
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-cs2113 already exists
-  lecture slot added
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-cs2113 already exists
-  lecture slot already exists
-    bookmark added to cs2113 lecture
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-laj1201 added
+LAJ1201 added
   tutorial_1 slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-geh1034 added
+GEH1034 added
   lecture slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cs2101 added
+LAJ1201 already exists
+  lecture slot added
+____________________________________________________________
+
+[Timetable mode] Input: ____________________________________________________________
+CS2101 added
   tutorial_1 slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-laj1201 already exists
+CG2271 added
   lecture slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cg2271 added
-  lecture slot added
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-cs2113t added
+CS2113T added
   tutorial slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-laj1201 already exists
+LAJ1201 already exists
   tutorial_2 slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cg2271 already exists
+CG2271 already exists
   tutorial slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cg2271 already exists
+CG2271 already exists
   lab slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cs2101 already exists
+CS2101 already exists
   tutorial_2 slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-cs2113t already exists
+CS2113T already exists
   lecture slot added
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-mon
-08:00-10:00 tutorial_1 LAJ1201
-14:00-16:00 lecture GEH1034
 
-tue
-14:00-16:00 lecture LAJ1201
-10:00-12:00 tutorial_1 CS2101
-<----Current Time: 18:36---->
-
-wed
-09:00-11:00 lecture CG2271
-11:00-12:00 tutorial CS2113T
-
-thu
-08:00-10:00 tutorial_2 LAJ1201
-11:00-12:00 tutorial CG2271
-
-fri
-10:00-12:00 tutorial_2 CS2101
-08:00-10:00 lab CG2271
-16:00-18:00 lecture CS2113T
-
-sat
-No lessons
-
-sun
-No lessons
-
+module does not exist
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________
-Lessons for tue
-14:00-16:00 lecture LAJ1201
-10:00-12:00 tutorial_1 CS2101
-<----Current Time: 18:36---->
 
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-Lessons for mon
-08:00-10:00 tutorial_1 LAJ1201
-14:00-16:00 lecture GEH1034
-
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-Lessons for sat
-No lessons
-
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-1111 added
-____________________________________________________________
-
-[Timetable mode] Input: ____________________________________________________________
-module does not exists
+module does not exist
 ____________________________________________________________
 
 [Timetable mode] Input: ____________________________________________________________

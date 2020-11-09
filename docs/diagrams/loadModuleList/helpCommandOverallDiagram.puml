@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+participant ":Zoomaster" as Zoomaster
+participant "<<class>> :Parser" as Parser
+
+participant ":HelpCommand" as HelpCommand
+participant ":Ui" as Ui
+activate Zoomaster
+Zoomaster-> Parser : parse(helpCommand)
+activate Parser
+
+
+
+create HelpCommand
+Parser-> HelpCommand : HelpCommand(details)
+activate HelpCommand
+
+opt details isNotEmpty
+opt details isNotValidCommand
+note right of HelpCommand : throws exception
+end opt
+end opt
+
+HelpCommand--> Parser : command
+deactivate HelpCommand
+Parser--> Zoomaster : command
+deactivate Parser
+
+Zoomaster-> HelpCommand : execute(bookmarks, timetable, ui)
+activate HelpCommand
+
+alt details is empty
+
+        ref over Parser, HelpCommand, Ui
+            details is empty
+        end ref
+
+else details not empty
+        ref over Parser, HelpCommand, Ui
+            details not empty
+        end ref
+    end alt
+    deactivate Ui
+
+destroy HelpCommand
+
+@enduml

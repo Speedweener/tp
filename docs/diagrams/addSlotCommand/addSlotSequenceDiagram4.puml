@@ -1,0 +1,31 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd Create bookmark for existing slot based on its index
+
+participant ":AddSlotCommand" as AddSlotCommand
+participant ":Module" as Module
+
+
+activate AddSlotCommand
+
+AddSlotCommand -> AddSlotCommand : retrieveSlotFromModule\n(module, slotAndBookmark)
+activate AddSlotCommand
+
+AddSlotCommand -> Module : getSlot(index)
+activate Module
+
+Module --> AddSlotCommand : slot
+deactivate Module
+
+AddSlotCommand --> AddSlotCommand : slot
+deactivate AddSlotCommand
+
+ref over AddSlotCommand, Module
+    Create bookmark for slot
+end ref
+
+
+
+@enduml

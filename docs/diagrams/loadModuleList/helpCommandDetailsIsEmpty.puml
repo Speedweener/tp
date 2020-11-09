@@ -1,0 +1,40 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+mainframe details is empty
+participant "<<class>> :Parser" as Parser
+participant ":HelpCommand" as HelpCommand
+participant ":Ui" as Ui
+
+
+    activate HelpCommand
+    HelpCommand -> Ui : printHelpMessage()
+    activate Ui
+    Ui -> Parser :
+    activate Parser
+    Parser --> Ui : programMode
+    deactivate Parser
+
+    alt programMode == 0
+    Ui -> Ui : printYellowWithBorder(MainMenuCommands)
+        activate Ui
+        deactivate Ui
+
+    else programMode == 1
+    Ui -> Ui : printYellowWithBorder(BookmarkModeCommands)
+            activate Ui
+            deactivate Ui
+
+    else programMode == 2
+    Ui -> Ui : printYellowWithBorder(TimetableModeCommands)
+            activate Ui
+            deactivate Ui
+
+    else programMode == 3
+    Ui -> Ui : printYellowWithBorder(PlannerModeCommands)
+            activate Ui
+            deactivate Ui
+    end alt
+
+    deactivate Ui
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd delete module
+
+participant ":DeleteSlotCommand" as DeleteSlotCommand
+participant ":Timetable" as Timetable
+participant ":Module" as Module
+
+activate DeleteSlotCommand
+
+DeleteSlotCommand -> Timetable : deleteModule(module);
+activate Timetable
+
+Timetable -> Module : remove(module)
+activate Module
+
+Module --> Timetable
+deactivate Module
+destroy Module
+
+Timetable --> DeleteSlotCommand
+deactivate Timetable
+
+@enduml

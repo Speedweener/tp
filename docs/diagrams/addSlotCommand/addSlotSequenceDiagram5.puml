@@ -1,0 +1,53 @@
+@startuml
+hide footbox
+skinparam ParticipantPadding 20
+
+mainframe sd Get slot if it exists, else create a new slot
+
+participant ":AddSlotCommand" as AddSlotCommand
+participant ":Module" as Module
+participant ":Slot" as Slot
+participant ":Slot" as SlotNew
+
+activate AddSlotCommand
+
+alt slot exists
+    AddSlotCommand -> Module : getSlot(lesson, day, startTime, endTime)
+    activate Module
+
+    loop loop through \nslots
+
+        opt is slot
+            Module -> Slot : match(lesson, day, startTime, endTime)
+            activate Slot
+
+            Slot --> Module : true
+            deactivate Slot
+        end opt
+
+    end loop
+
+    Module --> AddSlotCommand : slot
+    deactivate Module
+
+else slot does not exist
+    AddSlotCommand -> Module : createSlotNew\n(lesson, day, startTime, endTime)
+    activate Module
+
+    Module -> SlotNew ** : new Slot(lesson, day, startTime, endTime)
+    activate SlotNew
+
+    SlotNew --> Module
+    deactivate SlotNew
+
+    Module --> AddSlotCommand : slot
+    deactivate Module
+
+    AddSlotCommand -> Module : addSlot(slot)
+    activate Module
+
+    Module --> AddSlotCommand
+    deactivate Module
+end
+
+@enduml
